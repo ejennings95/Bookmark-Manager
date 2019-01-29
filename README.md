@@ -7,6 +7,11 @@ As a user,
 So that I can remember my bookmarks
 I want to see a list of my bookmarks
 ```
+```
+As a user,
+So that I can remember a website
+I want to be able to add to my bookmarks
+```
 
 ![domain model diagram](./images/show_list.jpg)
 

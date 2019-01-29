@@ -1,2 +1,9 @@
 <h1>Your bookmarks:</h1>
   <%= @list %>
+  <form action="/add_bookmark" method="post">
+    <label for="add_bookmark">
+      <h2>Enter url here:</h2>
+    </label>
+    <input type="text" name="add_bookmark">
+    <input type="submit" value="Add">
+  </form>
