@@ -7,9 +7,13 @@ class Bookmark
   end
 
   def self.list
-    conn = PG.connect( dbname: 'bookmark_manager' )
-    conn.exec( "SELECT * FROM bookmarks" ).map do | row |
-      row['url']
+    if ENV['ENVIRONMENT'] == 'test'
+      conn = PG.connect( dbname: 'bookmark_manager_test' )
+    else
+      conn = PG.connect( dbname: 'bookmark_manager' )
+    end
+      conn.exec( "SELECT * FROM bookmarks" ).map do | row |
+        row['url']
+      end
     end
   end
-end

@@ -1,9 +1,10 @@
 feature 'You can view bookmarks' do
   scenario do
-    Bookmark.new("www.bingo.com")
-    Bookmark.new("www.bilbo.com")
+    conn = PG.connect( dbname: 'bookmark_manager_test' )
+    conn.exec("INSERT INTO bookmarks VALUES(1, 'http://www.makersacademy.com');")
+    conn.exec("INSERT INTO bookmarks VALUES(2, 'http://www.website.com');")
     visit '/bookmarks'
-    expect(page).to have_content "www.bingo.com"
-    expect(page).to have_content "www.bilbo.com"
+    expect(page).to have_content 'http://www.makersacademy.com'
+    expect(page).to have_content 'http://www.website.com'
   end
 end
