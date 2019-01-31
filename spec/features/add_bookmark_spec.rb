@@ -13,4 +13,15 @@ feature 'You can add a bookmark' do
     click_button 'Add'
     expect(page).to have_content 'website'
   end
+
+  feature 'You cannot add a bookmark if an incorrect url is given' do
+    scenario do
+      visit '/bookmarks'
+      fill_in 'title', with: 'website'
+      fill_in 'url', with: 'www.website.com'
+      click_button 'Add'
+      expect(page).to have_content "Bookmark not saved - url is incorrect"
+    end
+  end
+
 end

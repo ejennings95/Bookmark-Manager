@@ -1,7 +1,12 @@
 require 'sinatra/base'
+require 'sinatra/flash'
 require_relative '../lib/bookmark.rb'
+require_relative '../lib/database_setup.rb'
 
 class BookmarkManager < Sinatra::Base
+  enable :sessions
+  register Sinatra::Flash
+
   get '/' do
     'BookmarkManager'
   end
@@ -12,7 +17,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/add_bookmark' do
-    Bookmark.add(title: params[:title], url: params[:url])
+    flash[:warning] = "Bookmark not saved - url is incorrect" unless Bookmark.add(url: params[:url], title: params[:title])
     redirect '/bookmarks'
   end
 
@@ -22,11 +27,23 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/remove' do
-    p params
     Bookmark.remove(id: params[:id])
     redirect '/bookmarks'
   end
 
+  get '/update_bookmark' do
+    @table = Bookmark.list
+    erb(:update_bookmark)
+  end
+
+  post '/update' do
+    if Bookmark.update(id: params[:id], url: params[:url], title: params[:title])
+      redirect '/bookmarks'
+    else
+      flash[:warning] = "Bookmark not saved - url is incorrect"
+      redirect '/update_bookmark'
+    end
+  end
 
   run! if app_file == $0
 end

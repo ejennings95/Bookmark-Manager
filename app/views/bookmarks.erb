@@ -1,3 +1,5 @@
+<%= flash[:warning] %>
+
 <title>Your Bookmarks</title>
 <h1>Your bookmarks:</h1>
   <ul>
@@ -7,6 +9,7 @@
       </li>
     <% end %>
   </ul>
+
   <form action="/add_bookmark" method="post">
     <h3>Create new bookmark</h3>
     <label for="title">
@@ -19,3 +22,8 @@
     <input type="text" name="url">
     <input type="submit" value="Add">
   </form>
+
+  <!-- <div data-alert class="alert-box alert round">
+    This is an alert - alert that is rounded.
+    <a href="#" class="close">&times;</a>
+  </div> -->

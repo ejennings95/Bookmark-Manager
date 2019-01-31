@@ -16,4 +16,11 @@ describe Bookmark do
     Bookmark.remove(id: Bookmark.list.first.id)
     expect(Bookmark.list.count).to eq 0
   end
+
+  it 'can update a bookmark' do
+    bookmark = Bookmark.add(title: 'Website', url: 'http://www.website.com')
+    Bookmark.update(id: Bookmark.list.first.id, title: 'Website2', url: 'http://www.website2.com')
+    expect(Bookmark.list.first.url).to eq 'http://www.website2.com'
+    expect(Bookmark.list.first.title).to eq 'Website2'
+  end
 end
