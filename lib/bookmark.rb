@@ -26,6 +26,11 @@ class Bookmark
     url: result[0]['url'])
   end
 
+  def self.remove(id:)
+    test?
+    @conn.exec( "DELETE FROM bookmarks WHERE id = '#{id}'" )
+  end
+
   private
 
   def self.is_url?(url)

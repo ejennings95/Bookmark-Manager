@@ -16,6 +16,17 @@ class BookmarkManager < Sinatra::Base
     redirect '/bookmarks'
   end
 
+  get '/remove_bookmark' do
+    @table = Bookmark.list
+    erb(:remove_bookmark)
+  end
+
+  post '/remove' do
+    p params
+    Bookmark.remove(id: params[:id])
+    redirect '/bookmarks'
+  end
+
 
   run! if app_file == $0
 end
