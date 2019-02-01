@@ -5,6 +5,7 @@ require_relative '../lib/database_setup.rb'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions
+  enable :method_override
   register Sinatra::Flash
 
   get '/' do
@@ -16,7 +17,7 @@ class BookmarkManager < Sinatra::Base
     erb(:bookmarks)
   end
 
-  post '/add_bookmark' do
+  post '/bookmarks' do
     flash[:warning] = "Bookmark not saved - url is incorrect" unless Bookmark.add(url: params[:url], title: params[:title])
     redirect '/bookmarks'
   end
@@ -26,7 +27,7 @@ class BookmarkManager < Sinatra::Base
     erb(:remove_bookmark)
   end
 
-  post '/remove' do
+  delete '/bookmarks' do
     Bookmark.remove(id: params[:id])
     redirect '/bookmarks'
   end
@@ -37,11 +38,16 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/update' do
+    @bookmark = Bookmark.list.find { | bookmark | bookmark.id == params[:id] }
+    erb(:update_id)
+  end
+
+  patch '/bookmarks' do
     if Bookmark.update(id: params[:id], url: params[:url], title: params[:title])
       redirect '/bookmarks'
     else
       flash[:warning] = "Bookmark not saved - url is incorrect"
-      redirect '/update_bookmark'
+      redirect '/bookmarks'
     end
   end
 

@@ -11,7 +11,7 @@ feature 'You can add a bookmark' do
     fill_in 'title', with: 'website'
     fill_in 'url', with: 'http://www.website.com'
     click_button 'Add'
-    expect(page).to have_content 'website'
+    expect(page).to have_link('website', href: 'http://www.website.com')
   end
 
   feature 'You cannot add a bookmark if an incorrect url is given' do

@@ -12,7 +12,8 @@ feature 'You can delete a bookmark' do
     fill_in 'url', with: 'http://www.test.com'
     click_button 'Add'
     visit '/update_bookmark'
-    fill_in 'id', with: "#{Bookmark.list.first.id}"
+    choose 'Test'
+    click_button 'Update'
     fill_in 'title', with: 'Test2'
     fill_in 'url', with: 'http://www.test2.com'
     click_button 'Update'
@@ -27,7 +28,8 @@ feature 'You can delete a bookmark' do
       fill_in 'url', with: 'http://www.test.com'
       click_button 'Add'
       visit '/update_bookmark'
-      fill_in 'id', with: "#{Bookmark.list.first.id}"
+      choose 'Test'
+      click_button 'Update'
       fill_in 'title', with: 'Test2'
       fill_in 'url', with: 'www.test2.com'
       click_button 'Update'

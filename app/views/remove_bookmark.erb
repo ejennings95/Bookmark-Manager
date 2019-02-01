@@ -1,18 +1,12 @@
 <title>Remove Bookmarks</title>
 <h1>Current bookmarks:</h1>
-<ul>
-  <% @table.each do |bookmark| %>
-  <li>
-    <a> <%="ID: #{bookmark.id}, Title: #{bookmark.title}, Url: #{bookmark.url}"%> </a>
-    </li>
-  <% end %>
-</ul>
 
-<form action="/remove" method="post">
-  <h3>Remove bookmark:</h3>
-  <label for="id">
-    <h4>Enter bookmark id here:</h4>
-  </label>
-  <input type="text" name="id">
+<form action="/bookmarks" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <% @table.each do |bookmark| %>
+<input type="radio" name="id" id=<%= bookmark.title%> value=<%=bookmark.id%> > <a href=<%=bookmark.url%>><%=bookmark.title%></a><br />
+<% end %>
+<p>
   <input type="submit" value="Delete">
+</p>
 </form>

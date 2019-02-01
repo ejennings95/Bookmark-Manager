@@ -12,7 +12,7 @@ feature 'You can delete a bookmark' do
     fill_in 'url', with: 'http://www.test.com'
     click_button 'Add'
     visit '/remove_bookmark'
-    fill_in 'id', with: "#{Bookmark.list.first.id}"
+    choose 'Test'
     click_button 'Delete'
     expect(page).not_to have_content 'Test'
   end
