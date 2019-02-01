@@ -1,3 +1,6 @@
+ENV['RACK_ENV'] = 'test'
+ENV['ENVIRONMENT'] = 'test'
+
 require 'capybara'
 require 'capybara/rspec'
 require 'rack/test'
@@ -13,9 +16,6 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   # SimpleCov::Formatter::HTMLFormatter
 ])
 SimpleCov.start
-
-ENV['RACK_ENV'] = 'test'
-ENV['ENVIRONMENT'] = 'test'
 
 require File.expand_path '../app/app.rb', __dir__
 

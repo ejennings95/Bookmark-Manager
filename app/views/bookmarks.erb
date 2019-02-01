@@ -6,6 +6,15 @@
     <% @list.each do |bookmark| %>
     <li>
       <a href=<%= bookmark.url %>><%= bookmark.title %></a>
+      <form action="/add_comment" method="get">
+        <input type="hidden" name="id" value="<%=bookmark.id%>">
+        <input type="submit" value="Comment on <%=bookmark.title%>">
+      </form>
+      <% @comment_list.each do |comment| %>
+        <% if bookmark.id == comment.bookmark_id %>
+          <%= comment.text %>
+        <% end %>
+        <% end %>
       </li>
     <% end %>
   </ul>
